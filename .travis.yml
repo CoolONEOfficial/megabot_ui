@@ -8,8 +8,6 @@ addons:
   apt:
     packages:
       - putty-tools
-before_script:
-  - cd web_ui
 script:
   - npm ci
   - npm run build
