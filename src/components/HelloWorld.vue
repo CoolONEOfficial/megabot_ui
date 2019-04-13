@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container class="pb-5">
         <v-layout row>
             <v-flex xs8 class="LeftPart mr-5">
                 <v-layout column>
@@ -32,8 +32,7 @@
                                 <img src="../assets/img/symbol-18-1.svg"
                                      class="SubHeaderSearch my-3">
                             </v-layout>
-                            <v-container style="max-height: 400px"
-                                         class="scroll-y ma-0 pa-0">
+                            <vue-custom-scrollbar style="max-height: 500px">
                                 <v-layout column>
                                     <v-layout row class="SmallRect pa-3 mb-3 align-center"
                                               v-for="item in organizations" :key="item">
@@ -47,14 +46,37 @@
                                         <img src="../assets/img/symbol-16-2.svg" class="OrgIcon mr-4">
                                     </v-layout>
                                 </v-layout>
-                            </v-container>
+                            </vue-custom-scrollbar>
                         </v-flex>
                         <div style="width: 270px; margin-left: 140px;">
-                            <h3 class="SubHeader mt-3">Логи ошибок</h3>
-                            <v-layout column class="SmallRect pa-3">
-                                <p class="ErrCaption" v-for="item in errors" :key="errors">
-                                    #{{item.number}}: {{item.text}}
-                                </p>
+                            <h3 class="SubHeader mt-3 mb-3">Логи ошибок</h3>
+                            <v-layout column class="SmallRect pa-3 mb-5">
+                                <vue-custom-scrollbar style="max-height: 200px">
+                                    <p class="ErrCaption" v-for="item in errors" :key="item">
+                                        #{{item.number}}: {{item.text}}
+                                    </p>
+                                </vue-custom-scrollbar>
+                            </v-layout>
+
+                            <h3 class="SubHeader mt-3 mb-3">Форма ответного письма</h3>
+                            <v-layout column class="SmallRect px-3 py-2 justify-center">
+                                <div v-for="item in [
+                                        'Авторизация',
+                                        'Подключение\nличного кабинета',
+                                        'Смена тарифа',
+                                        'Дист. обслуживание',
+                                        'Включение / выключение услуг',
+                                    ]" :key="item">
+                                    <v-layout row >
+                                        <p class="ErrCaption px-1 py-2 ma-0" >
+                                            {{item}}
+                                        </p>
+                                        <v-spacer></v-spacer>
+                                        <img src="../assets/img/symbol-19-1.svg"
+                                             class="Symbol-19-1">
+                                    </v-layout>
+                                    <v-divider v-if="item != 'Включение / выключение услуг'"></v-divider>
+                                </div>
                             </v-layout>
                         </div>
                     </v-layout>
@@ -68,6 +90,8 @@
 </template>
 
 <script>
+    import vueCustomScrollbar from 'vue-custom-scrollbar'
+
     class Organisation {
         constructor(
             name,
@@ -93,6 +117,9 @@
     }
 
     export default {
+        components: {
+            vueCustomScrollbar
+        },
         computed: {
             requestCounts() {
                 return [
@@ -124,8 +151,7 @@
                         546546, "Shit happens"
                     ), new Error(
                         234324, "Shit happens"
-                    ),
-                    new Error(
+                    ), new Error(
                         234242, "Shit happens"
                     ), new Error(
                         12345, "Shit happens"
@@ -273,12 +299,12 @@
 
     .ErrCaption {
         opacity: 0.6;
-        font-family: MagistralCond;
+        font-family: MagistralCond,serif;
         font-size: 16px;
         font-weight: 300;
         font-style: normal;
         font-stretch: normal;
-        line-height: 1.19;
+        line-height: 0.9;
         letter-spacing: 0.5px;
         text-align: left;
         color: $greyish-brown;
@@ -368,7 +394,6 @@
     }
 
     .LeftPart {
-        background: #f7f7f7;
     }
 
     .RightPart {

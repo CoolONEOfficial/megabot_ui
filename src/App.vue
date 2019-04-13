@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app id="light">
     <v-content>
       <HelloWorld/>
     </v-content>
@@ -21,3 +21,9 @@ export default {
   }
 }
 </script>
+
+<style>
+  #light {
+    background: #f7f7f7;
+  }
+</style>

@@ -47,12 +47,10 @@ $font-weight: 400, $font-style: normal, $support-required: 'modern') {
 
 @include font-face("Magistral", "../assets/fonts/Magistral-Bold" );
 
-@include font-face("Magistral Cond", "../assets/fonts/MagistralCond-Light" );
+@include font-face("MagistralCond", "../assets/fonts/MagistralCond-Light" );
 
 @mixin Text-Style-2 {
   font-family: 'MagistralC';
-  src: url('../assets/fonts/MagistralC.woff2') format('woff2'),
-  url('../assets/fonts/MagistralC.woff') format('woff');
   font-size: 32px;
   line-height: 1.06;
   text-align: left;
@@ -61,8 +59,6 @@ $font-weight: 400, $font-style: normal, $support-required: 'modern') {
 
 @mixin Text-Style {
   font-family: 'Magistral';
-  src: url('./../assets/fonts/Magistral-Bold.woff2') format('woff2'),
-  url('./../assets/fonts/Magistral-Bold.woff') format('woff');
   font-size: 20px;
   font-weight: bold;
   line-height: 1.35;
@@ -71,9 +67,7 @@ $font-weight: 400, $font-style: normal, $support-required: 'modern') {
 }
 
 @mixin Text-Style-3 {
-  font-family: 'Magistral Cond';
-  src: url('../assets/fonts/MagistralCond-Light.woff2') format('woff2'),
-  url('../assets/fonts/MagistralCond-Light.woff') format('woff');
+  font-family: 'MagistralCond';
   font-size: 12px;
   font-weight: 300;
   line-height: 1.17;
