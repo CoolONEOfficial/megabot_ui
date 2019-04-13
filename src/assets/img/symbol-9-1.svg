@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="27.95" height="27.95" viewBox="0 0 27.95 27.95">
+    <defs>
+        <style>
+            .cls-1{fill:none;stroke:#00b856;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-width:2px}
+        </style>
+    </defs>
+    <g id="Symbol_9_1" data-name="Symbol 9 – 1" transform="translate(-1865.05 -116.05)">
+        <g id="Group_21" data-name="Group 21" transform="translate(1866.05 117.05)">
+            <path id="Path_23" d="M265 6.9l5.9-5.9 5.9 5.9" class="cls-1" data-name="Path 23" transform="translate(-265 -1)"/>
+            <path id="Line_2" d="M0 0v25.95" class="cls-1" data-name="Line 2" transform="translate(5.898)"/>
+        </g>
+        <g id="Group_22" data-name="Group 22" transform="translate(1880.204 117.05)">
+            <path id="Path_24" d="M288.8 18l-5.9 5.9L277 18" class="cls-1" data-name="Path 24" transform="translate(-277 2.053)"/>
+            <path id="Line_3" d="M0 25.95V0" class="cls-1" data-name="Line 3" transform="translate(5.898)"/>
+        </g>
+    </g>
+</svg>

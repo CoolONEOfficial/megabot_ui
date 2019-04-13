@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20.775" height="19.068" viewBox="0 0 20.775 19.068">
+    <defs>
+        <style>
+            .cls-1{fill:none;stroke:#721a82;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-width:2px}
+        </style>
+    </defs>
+    <g id="Symbol_16_2" data-name="Symbol 16 – 2" transform="translate(-692.726 -601.62)">
+        <g id="Group_61" data-name="Group 61" transform="translate(693.726 602.62)">
+            <g id="Group_60" data-name="Group 60">
+                <path id="Path_52" d="M283.775 97.681V92.56a2.515 2.515 0 0 0-2.56-2.56H267.56a2.514 2.514 0 0 0-2.56 2.56v10.24a2.514 2.514 0 0 0 2.56 2.56h5.974" class="cls-1" data-name="Path 52" transform="translate(-265 -90)"/>
+            </g>
+            <path id="Path_53" d="M266 91l8.534 7.681L283.068 91" class="cls-1" data-name="Path 53" transform="translate(-265.147 -90.147)"/>
+            <path id="Line_24" d="M0 3.414L3.414 0" class="cls-1" data-name="Line 24" transform="translate(3.414 6.827)"/>
+        </g>
+        <path id="Line_25" d="M0 0v6.827" class="cls-1" data-name="Line 25" transform="translate(709.087 612.861)"/>
+        <path id="Line_26" d="M6.827 0H0" class="cls-1" data-name="Line 26" transform="translate(705.673 616.274)"/>
+    </g>
+</svg>
