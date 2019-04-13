@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - stable
+branches:
+  only:
+    - master
+addons:
+  apt:
+    packages:
+      - putty-tools
+before_script:
+  - cd web_ui
+script:
+  - npm ci
+  - npm run build
+after_success: yes|pscp -r -pw buheizseuh ./dist a0231165@cometbot.ru:/home/a0231165/domains/cometbot.ru/public_html
