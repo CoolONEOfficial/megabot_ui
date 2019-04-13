@@ -51,6 +51,11 @@
                         </v-flex>
                         <div style="width: 270px; margin-left: 140px;">
                             <h3 class="SubHeader mt-3">Логи ошибок</h3>
+                            <v-layout column class="SmallRect pa-3">
+                                <p class="ErrCaption" v-for="item in errors" :key="errors">
+                                    #{{item.number}}: {{item.text}}
+                                </p>
+                            </v-layout>
                         </div>
                     </v-layout>
                 </v-layout>
@@ -120,6 +125,57 @@
                     ), new Error(
                         234324, "Shit happens"
                     ),
+                    new Error(
+                        234242, "Shit happens"
+                    ), new Error(
+                        12345, "Shit happens"
+                    ), new Error(
+                        24654, "Shit happens"
+                    ), new Error(
+                        65765, "Shit happens"
+                    ), new Error(
+                        546546, "Shit happens"
+                    ), new Error(
+                        234324, "Shit happens"
+                    ), new Error(
+                        234242, "Shit happens"
+                    ), new Error(
+                        12345, "Shit happens"
+                    ), new Error(
+                        24654, "Shit happens"
+                    ), new Error(
+                        65765, "Shit happens"
+                    ), new Error(
+                        546546, "Shit happens"
+                    ), new Error(
+                        234324, "Shit happens"
+                    ), new Error(
+                        234242, "Shit happens"
+                    ), new Error(
+                        12345, "Shit happens"
+                    ), new Error(
+                        24654, "Shit happens"
+                    ), new Error(
+                        65765, "Shit happens"
+                    ), new Error(
+                        546546, "Shit happens"
+                    ), new Error(
+                        234324, "Shit happens"
+                    ), new Error(
+                        234242, "Shit happens"
+                    ), new Error(
+                        12345, "Shit happens"
+                    ), new Error(
+                        24654, "Shit happens"
+                    ), new Error(
+                        65765, "Shit happens"
+                    ), new Error(
+                        546546, "Shit happens"
+                    ), new Error(
+                        234324, "Shit happens"
+                    ),
+
+
                 ],
                 organizations: [
                     new Organisation(
@@ -214,6 +270,19 @@
 <style lang="scss">
     @import "colors.scss";
     @import "fonts.scss";
+
+    .ErrCaption {
+        opacity: 0.6;
+        font-family: MagistralCond;
+        font-size: 16px;
+        font-weight: 300;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.19;
+        letter-spacing: 0.5px;
+        text-align: left;
+        color: $greyish-brown;
+    }
 
     .GreyCaption {
         opacity: 0.6;
