@@ -144,7 +144,7 @@
                                 new Organisation(
                                     org.name,
                                     org.accountId,
-                                    org.numbers,
+                                    3,
                                     org.icon,
                                 )
                             );
@@ -200,7 +200,9 @@
                 errors: new Array(20).fill(new Error(
                     234242, "Shit happens"
                 )),
-                organizations: [],
+                organizations: [
+                    new Organisation("dfsd", 2333, 34, "dsfsf")
+                ],
             };
         }
     }
