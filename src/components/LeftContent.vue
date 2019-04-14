@@ -7,7 +7,7 @@
             <h1 class="LogoText ml-3" style="margin-top: 6px">МегаБот</h1>
         </v-layout>
 
-        <v-layout row class="BigRect justify-space-around align-center mb-3 py-4">
+        <v-layout row class="BigRect justify-space-around align-center mb-3 py-4" :style="`opacity: ${auth == null ? 0.5 : 1};`">
             <img :src="require(`@/assets/img/1_${auth ? 'on' : 'off'}.svg`)"
                  class="HeadIcon" @click="auth = !auth" alt="Авторизация">
 
@@ -26,7 +26,9 @@
                 <img :src="require(`@/assets/img/${item[1]}.svg`)"
                      class="UsersItemSmile my-3">
                 <h4 class="UsersItemCaption">{{item[0]}}</h4>
-                <h1 class="UsersItemCount">{{requestCounts[index]}}</h1>
+
+                <h1 class="UsersItemCount" v-if="requestCounts[index] !== 0">{{requestCounts[index]}}</h1>
+                <v-progress-circular indeterminate class="ma-3" v-else></v-progress-circular>
             </v-layout>
         </v-layout>
 
@@ -41,7 +43,7 @@
                     <v-layout column>
                         <v-layout row class="SmallRect py-3 pl-3 mr-3 mb-3 align-center"
                                   v-for="item in organizations" :key="item">
-                            <img src="../assets/img/symbol-13-1.svg" class="OrgLogo mr-3">
+                            <img :src="require(`@/assets/img/${item.icon}.png`)" class="OrgLogo mr-3">
                             <v-layout column class="justify-center">
                                 <p class="OrgTitle mb-2">{{ item.name }}</p>
                                 <p class="GreyCaption mb-0">Лицевой счет: {{ item.orgId }}</p>
@@ -85,6 +87,7 @@
 <script>
     import vueCustomScrollbar from 'vue-custom-scrollbar'
     import axios from "axios";
+    import http from 'http';
 
     class Organisation {
         constructor(
@@ -102,10 +105,10 @@
 
     class Error {
         constructor(
-            number,
+            accountId,
             text
         ) {
-            this.number = number;
+            this.accountId = accountId;
             this.text = text;
         }
     }
@@ -115,9 +118,23 @@
             vueCustomScrollbar
         },
         methods: {
+            get_json(url, callback) {
+        http.get(url, function(res) {
+            var body = '';
+            res.on('data', function(chunk) {
+                body += chunk;
+            });
+
+            res.on('end', function() {
+                var response = JSON.parse(body);
+// call function ----v
+                callback(response);
+            });
+        });
+    },
             saveIni(key, value) {
                 axios.get(
-                    './scripts/prefs_writer.php', {
+                    'http://cometbot.ru/scripts/prefs_writer.php', {
                         params: {
                             key: key,
                             value: value,
@@ -126,27 +143,56 @@
                 );
             }
         },
-        mounted() {
-            axios
-                .get('./scripts/getdb.php', {
+        async mounted() {
+            let data = (await axios
+                .get('http://cometbot.ru/scripts/getdb.php', {
                         params: {
                             query: 'SELECT * FROM organisations',
                         }
                     }
-                )
-                .then(
-                    response => function () {
-                        for(let org in response) {
-                            this.organizations.push(
-                                new Organisation(
-                                    org.name,
-                                    org.accountId,
-                                    3,
-                                    org.icon,
-                                )
-                            );
+                )).data;
+
+            for (let orgId in data) {
+                let org = data[orgId];
+                this.organizations.push(
+                    new Organisation(
+                        org.title,
+                        org.accountId,
+                        3,
+                        org.icon
+                    )
+                );
+            }
+
+            data = (await axios
+                .get('http://cometbot.ru/scripts/getdb.php', {
+                        params: {
+                            query: 'SELECT * FROM parsed WHERE status=0',
                         }
-                    });
+                    }
+                )).data;
+
+            this.successCount = data.length;
+
+            data = (await axios
+                .get('http://cometbot.ru/scripts/getdb.php', {
+                        params: {
+                            query: 'SELECT * FROM parsed WHERE status=1',
+                        }
+                    }
+                )).data;
+
+            this.failedCount = data.length;
+
+            data = (await axios
+                .get('http://cometbot.ru/scripts/prefs_reader.php', {})).data;
+
+            console.log('dadaata:', data);
+
+            this.auth = data.auth === "true";
+            this.service = data.service === "true";
+            this.tariff = data.tariff === "true";
+            this.office = data.office === "true";
         },
         watch: {
             auth(nauth) {
@@ -173,12 +219,12 @@
         },
         data() {
             return {
-                auth: true,
-                office: true,
-                service: false,
-                tariff: true,
-                successCount: 23,
-                failedCount: 34,
+                auth: null,
+                office: null,
+                service: null,
+                tariff: null,
+                successCount: 0,
+                failedCount: 0,
                 userItems: [
                     ['Обслуженных клиентов', 'symbol-3-2'],
                     ['Необслуженных запросов', 'symbol-2-2'],
@@ -194,9 +240,7 @@
                 errors: new Array(20).fill(new Error(
                     234242, "Shit happens"
                 )),
-                organizations: [
-                    new Organisation("dfsd", 2333, 34, "dsfsf")
-                ],
+                organizations: [],
             };
         }
     }
