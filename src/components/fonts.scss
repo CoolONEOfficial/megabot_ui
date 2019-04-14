@@ -15,7 +15,7 @@
  */
 @import "colors";
 
-@mixin font-face( $font-name, $font-path, // path + file name. Ex : path/to/font/filename
+@mixin font-face( $font-name, $font-path, // path + file companyname. Ex : path/to/font/filename
 $font-weight: 400, $font-style: normal, $support-required: 'modern') {
   @font-face {
     font-family: $font-name;
