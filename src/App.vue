@@ -22,7 +22,6 @@
 <script>
     import LeftContent from './components/LeftContent'
     import RightContent from "./components/RightContent";
-    import axios from 'axios';
 
     export default {
         name: 'App',

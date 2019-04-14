@@ -7,7 +7,8 @@
             <h1 class="LogoText ml-3" style="margin-top: 6px">МегаБот</h1>
         </v-layout>
 
-        <v-layout row class="BigRect justify-space-around align-center mb-3 py-4" :style="`opacity: ${auth == null ? 0.5 : 1};`">
+        <v-layout row class="BigRect justify-space-around align-center mb-3 py-4"
+                  :style="`opacity: ${auth == null ? 0.5 : 1};`">
             <img :src="require(`@/assets/img/1_${auth ? 'on' : 'off'}.svg`)"
                  class="HeadIcon" @click="auth = !auth" alt="Авторизация">
 
@@ -37,7 +38,13 @@
                 <v-layout row>
                     <h3 class="SubHeader mt-3 mr-3">Сводный отчет по организациям</h3>
                     <img src="../assets/img/symbol-18-1.svg"
-                         class="SubHeaderSearch my-3">
+                         class="SubHeaderSearch my-3" style="cursor: pointer"
+                         @click="searchOrganisationModel = !searchOrganisationModel">
+                    <v-text-field
+                            class="ma-0 pa-0 ml-3"
+                            v-model="searchOrganisationModel"
+                            label="Поиск"
+                    ></v-text-field>
                 </v-layout>
                 <vue-custom-scrollbar style="max-height: 400px">
                     <v-layout column>
@@ -119,19 +126,19 @@
         },
         methods: {
             get_json(url, callback) {
-        http.get(url, function(res) {
-            var body = '';
-            res.on('data', function(chunk) {
-                body += chunk;
-            });
+                http.get(url, function (res) {
+                    var body = '';
+                    res.on('data', function (chunk) {
+                        body += chunk;
+                    });
 
-            res.on('end', function() {
-                var response = JSON.parse(body);
+                    res.on('end', function () {
+                        var response = JSON.parse(body);
 // call function ----v
-                callback(response);
-            });
-        });
-    },
+                        callback(response);
+                    });
+                });
+            },
             saveIni(key, value) {
                 axios.get(
                     'http://cometbot.ru/scripts/prefs_writer.php', {
@@ -219,6 +226,8 @@
         },
         data() {
             return {
+                searchOrganisationShow: false,
+                searchOrganisationModel: "",
                 auth: null,
                 office: null,
                 service: null,
