@@ -137,8 +137,6 @@
                 )
                 .then(
                     response => function () {
-                        console.log(response);
-
                         for(let org in response) {
                             this.organizations.push(
                                 new Organisation(
@@ -149,10 +147,7 @@
                                 )
                             );
                         }
-                    })
-                .catch(
-                    reason => console.log(reason)
-                );
+                    });
         },
         watch: {
             auth(nauth) {
