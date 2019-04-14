@@ -131,7 +131,7 @@
             axios
                 .get('./scripts/getdb.php', {
                         params: {
-                            query: 'SELECT * FROM users',
+                            query: 'SELECT * FROM organisations',
                         }
                     }
                 )
