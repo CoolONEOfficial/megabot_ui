@@ -118,7 +118,10 @@
             saveIni(key, value) {
                 axios.get(
                     './scripts/prefs_writer.php', {
-                        key: value
+                        params: {
+                            key: key,
+                            value: value,
+                        }
                     }
                 ).then(response => console.log(response.data))
                     .catch(error => console.log(error));
