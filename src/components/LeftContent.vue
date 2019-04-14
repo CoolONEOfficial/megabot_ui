@@ -8,9 +8,17 @@
         </v-layout>
 
         <v-layout row class="BigRect justify-space-around align-center mb-3 py-4">
-            <img :src="require(`@/assets/img/${name}.svg`)"
-                 class="HeadIcon" v-for="name of ['symbol-7-2', 'symbol-6-2', 'symbol-4-2', 'symbol-5-2']"
-                 :key="name">
+            <img :src="require(`@/assets/img/1_${auth ? 'on' : 'off'}.svg`)"
+                 class="HeadIcon" @click="auth = !auth" alt="Авторизация">
+
+            <img :src="require(`@/assets/img/2_${office ? 'on' : 'off'}.svg`)"
+                 class="HeadIcon" @click="office = !office" alt="Личный кабинет">
+
+            <img :src="require(`@/assets/img/3_${service ? 'on' : 'off'}.svg`)"
+                 class="HeadIcon" @click="service = !service" alt="Дистанционное обслуживание">
+
+            <img :src="require(`@/assets/img/4_${tariff ? 'on' : 'off'}.svg`)"
+                 class="HeadIcon" @click="tariff = !tariff" alt="Тарифы и услуги">
         </v-layout>
 
         <v-layout row class="justify-space-between mb-1">
@@ -76,6 +84,7 @@
 
 <script>
     import vueCustomScrollbar from 'vue-custom-scrollbar'
+    import {AxiosInstance as axios} from "axios";
 
     class Organisation {
         constructor(
@@ -105,6 +114,29 @@
         components: {
             vueCustomScrollbar
         },
+        methods: {
+            saveIni(key, value) {
+                axios.get(
+                    './scripts/prefs_writer.php', {
+                        key: value
+                    }
+                );
+            }
+        },
+        watch: {
+            auth(nauth) {
+                this.saveIni('auth', nauth);
+            },
+            office(noffice) {
+                this.saveIni('office', noffice);
+            },
+            service(nservice) {
+                this.saveIni('service', nservice);
+            },
+            tariff(ntariff) {
+                this.saveIni('tariff', ntariff);
+            },
+        },
         computed: {
             requestCounts() {
                 return [
@@ -116,10 +148,10 @@
         },
         data() {
             return {
-                auth : true,
-                office : true,
-                service : true,
-                tariff : true,
+                auth: true,
+                office: true,
+                service: true,
+                tariff: true,
                 successCount: 23,
                 failedCount: 34,
                 userItems: [

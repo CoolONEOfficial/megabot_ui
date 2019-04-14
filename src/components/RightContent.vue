@@ -54,7 +54,6 @@
             this.companyname = companyname;
             this.action = action;
         }
-
     }
 
     export default {
