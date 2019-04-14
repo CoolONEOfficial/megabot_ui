@@ -129,7 +129,12 @@
         },
         mounted() {
             axios
-                .get('./scripts/getdb.php')
+                .get('./scripts/getdb.php', {
+                        params: {
+                            query: 'SELECT * FROM users',
+                        }
+                    }
+                )
                 .then(
                     response => function () {
                         console.log(response);
