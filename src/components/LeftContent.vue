@@ -44,7 +44,7 @@
                             <img src="../assets/img/symbol-13-1.svg" class="OrgLogo mr-3">
                             <v-layout column class="justify-center">
                                 <p class="OrgTitle mb-2">{{ item.name }}</p>
-                                <p class="GreyCaption mb-0">Лицевой счет: {{ item.number }}</p>
+                                <p class="GreyCaption mb-0">Лицевой счет: {{ item.orgId }}</p>
                             </v-layout>
                             <v-spacer></v-spacer>
                             <img src="../assets/img/symbol-15-2.svg" class="OrgIcon">
@@ -59,7 +59,7 @@
                 <v-layout column class="SmallRect py-3 pl-3 pr-2">
                     <vue-custom-scrollbar style="max-height: 200px">
                         <p class="ErrCaption" v-for="item in errors" :key="item">
-                            #{{item.number}}: {{item.text}}
+                            #{{item.orgId}}: {{item.text}}
                         </p>
                     </vue-custom-scrollbar>
                 </v-layout>
@@ -89,12 +89,12 @@
     class Organisation {
         constructor(
             name,
-            number,
+            orgId,
             users,
             icon,
         ) {
             this.name = name;
-            this.number = number;
+            this.orgId = orgId;
             this.icon = icon;
             this.users = users;
         }
@@ -138,6 +138,17 @@
                 .then(
                     response => function () {
                         console.log(response);
+
+                        for(let org in response) {
+                            this.organizations.push(
+                                new Organisation(
+                                    org.name,
+                                    org.accountId,
+                                    org.numbers,
+                                    org.icon,
+                                )
+                            );
+                        }
                     });
         },
         watch: {
@@ -167,7 +178,7 @@
             return {
                 auth: true,
                 office: true,
-                service: true,
+                service: false,
                 tariff: true,
                 successCount: 23,
                 failedCount: 34,
@@ -186,12 +197,7 @@
                 errors: new Array(20).fill(new Error(
                     234242, "Shit happens"
                 )),
-                organizations: new Array(20).fill(new Organisation(
-                    "Сбер",
-                    12312313123123,
-                    23,
-                    "icon.png"
-                )),
+                organizations: [],
             };
         }
     }
