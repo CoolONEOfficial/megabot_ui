@@ -127,6 +127,14 @@
                     .catch(error => console.log(error));
             }
         },
+        mounted() {
+            axios
+                .get('./scripts/getdb.php')
+                .then(
+                    response => function () {
+                        console.log(response);
+                    });
+        },
         watch: {
             auth(nauth) {
                 this.saveIni('auth', nauth);
