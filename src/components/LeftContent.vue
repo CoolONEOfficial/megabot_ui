@@ -84,7 +84,7 @@
 
 <script>
     import vueCustomScrollbar from 'vue-custom-scrollbar'
-    import {AxiosInstance as axios} from "axios";
+    import axios from "axios";
 
     class Organisation {
         constructor(
@@ -120,7 +120,8 @@
                     './scripts/prefs_writer.php', {
                         key: value
                     }
-                );
+                ).then(response => console.log(response.data))
+                    .catch(error => console.log(error));
             }
         },
         watch: {
