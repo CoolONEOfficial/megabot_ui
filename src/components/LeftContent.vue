@@ -149,7 +149,10 @@
                                 )
                             );
                         }
-                    });
+                    })
+                .catch(
+                    reason => console.log(reason)
+                );
         },
         watch: {
             auth(nauth) {
